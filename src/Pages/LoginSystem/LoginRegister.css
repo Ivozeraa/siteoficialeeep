@@ -17,12 +17,32 @@
 }
 
 input[type="email"],
-input[type="password"] {
-  width: 95%;
+input[type="password"],
+input[type="text"] {
+  width: 100%;
   padding: 10px;
+  padding-right: 40px; /* Espaço para o ícone */
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
+  box-sizing: border-box; /* Garantir que o padding-right funcione */
+}
+
+.password-container {
+  position: relative; /* Para posicionar o ícone dentro do input */
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+}
+
+.password-toggle:hover {
+  color: #333;
 }
 
 button {

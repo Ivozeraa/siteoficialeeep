@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth } from './firebase';
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Ícones de olho
 import './LoginRegister.css';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // Estado para alternar visualização de senha
   const [role, setRole] = useState('Aluno');
   const [error, setError] = useState('');
 
@@ -44,12 +46,21 @@ const Register = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <input
-          type="password"
-          placeholder="Senha"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        
+        <div className="password-container">
+          <input
+            type={showPassword ? 'text' : 'password'} // Alterna entre password e text
+            placeholder="Senha"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <span
+            className="password-toggle"
+            onClick={() => setShowPassword(!showPassword)} // Alterna o estado de visualização da senha
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />} {/* Ícone que alterna */}
+          </span>
+        </div>
 
         <div className="role-select">
           <label>
