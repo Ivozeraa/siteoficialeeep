@@ -1,12 +1,17 @@
 import React from 'react';
 import Header from '../Components/Header';
+import "../Css/Home.css"
 
 const Home = () => {
   return (
-    <div>
-      <Header />
-      <h1>Bem-vindo à Página Inicial</h1>
+    <>
+    <Header />
+    <div className="home">
+      <h1>Bem-vindo ao Portal da Escola</h1>
+      <p>Esta é a página inicial com as últimas atualizações e notícias da escola.</p>
+      <button>Saiba mais</button>
     </div>
+    </>
   );
 };
 

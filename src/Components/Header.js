@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../Css/Header.css';
-import { FaUserCircle } from 'react-icons/fa'; // Ícone de configurações
 
 const Header = () => {
   return (
@@ -21,7 +20,6 @@ const Header = () => {
           </li>
         </ul>
         <div className="user-settings">
-          <Link to="/configuracoes"><FaUserCircle size={32} /></Link>
         </div>
       </nav>
     </header>

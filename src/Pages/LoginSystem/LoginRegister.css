@@ -1,10 +1,14 @@
+*{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .login-container {
   max-width: 400px;
   margin: 50px auto;
   padding: 20px;
-  background-color: #f0f0f0;
+  background-color: #e0dede;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.103);
 }
 
 .login-container h2 {
@@ -14,7 +18,7 @@
 
 input[type="email"],
 input[type="password"] {
-  width: 100%;
+  width: 95%;
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #ccc;
@@ -29,10 +33,12 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 13px;
 }
 
 button:hover {
-  background-color: #24503b;
+  background-color: #199157;
+  transition: 0.5s ease-in-out;
 }
 
 .google-login {
@@ -41,7 +47,7 @@ button:hover {
 }
 
 .google-login:hover {
-  background-color: #c23321;
+  background-color: #c92f1a;
 }
 
 .error-message {
@@ -58,6 +64,7 @@ button:hover {
 
 .role-select label {
   font-size: 16px;
+  margin: auto;
 }
 
 .register-link {
