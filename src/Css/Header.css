@@ -42,6 +42,7 @@
 .navbar ul {
   display: flex;
   list-style: none;
+  align-items: center;
   gap: 20px;
   margin-right: 20px;
 }

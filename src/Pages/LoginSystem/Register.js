@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { auth } from './firebase';
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Ícones de olho
+import { auth, db } from '../../Services/firebase';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { setDoc, doc } from "firebase/firestore";
+import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 import './LoginRegister.css';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false); // Estado para alternar visualização de senha
+  const [name, setName] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState('Aluno');
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Hook para redirecionar
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -18,9 +22,20 @@ const Register = () => {
         setError('Somente alunos e convidados podem se registrar.');
         return;
       }
-      await createUserWithEmailAndPassword(auth, email, password);
+
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      await setDoc(doc(db, "users", user.uid), {
+        name: name,
+        email: email,
+        role: role,
+      });
+
       alert(`Registrado como ${role}`);
+      navigate('/login'); // Redireciona para a página de login após registro bem-sucedido
     } catch (error) {
+      console.error("Erro ao registrar:", error.message);
       setError('Erro ao registrar. Tente novamente.');
     }
   };
@@ -28,8 +43,17 @@ const Register = () => {
   const handleGoogleRegister = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider);
+      const userCredential = await signInWithPopup(auth, provider);
+      const user = userCredential.user;
+
+      await setDoc(doc(db, "users", user.uid), {
+        name: user.displayName || "Usuário Google",
+        email: user.email,
+        role: 'Aluno',
+      });
+
       alert('Registrado com Google!');
+      navigate('/login'); // Redireciona para a página de login após registro bem-sucedido
     } catch (error) {
       setError('Erro ao registrar com Google.');
     }
@@ -41,6 +65,12 @@ const Register = () => {
       {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleRegister}>
         <input
+          type="text"
+          placeholder="Nome"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
           type="email"
           placeholder="Email"
           value={email}
@@ -49,16 +79,16 @@ const Register = () => {
         
         <div className="password-container">
           <input
-            type={showPassword ? 'text' : 'password'} // Alterna entre password e text
+            type={showPassword ? 'text' : 'password'}
             placeholder="Senha"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <span
             className="password-toggle"
-            onClick={() => setShowPassword(!showPassword)} // Alterna o estado de visualização da senha
+            onClick={() => setShowPassword(!showPassword)}
           >
-            {showPassword ? <FaEyeSlash /> : <FaEye />} {/* Ícone que alterna */}
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
           </span>
         </div>
 

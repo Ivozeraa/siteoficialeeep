@@ -21,15 +21,15 @@ input[type="password"],
 input[type="text"] {
   width: 100%;
   padding: 10px;
-  padding-right: 40px; /* Espaço para o ícone */
+  padding-right: 40px; 
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-sizing: border-box; /* Garantir que o padding-right funcione */
+  box-sizing: border-box; 
 }
 
 .password-container {
-  position: relative; /* Para posicionar o ícone dentro do input */
+  position: relative; 
 }
 
 .password-toggle {

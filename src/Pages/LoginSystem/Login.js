@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { auth } from './firebase';
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Ícones de olho
+import { auth } from '../../Services/firebase';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import './LoginRegister.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false); // Estado para alternar visualização de senha
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Hook para redirecionar
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
       alert('Login bem-sucedido!');
+      navigate('/Home'); // Redireciona para HomeLogado
     } catch (error) {
       setError('Erro ao fazer login. Verifique suas credenciais.');
     }
@@ -25,6 +28,7 @@ const Login = () => {
     try {
       await signInWithPopup(auth, provider);
       alert('Login com Google bem-sucedido!');
+      navigate('./Logado/Pages/Home'); // Redireciona para HomeLogado
     } catch (error) {
       setError('Erro ao fazer login com Google.');
     }
@@ -44,16 +48,16 @@ const Login = () => {
         
         <div className="password-container">
           <input
-            type={showPassword ? 'text' : 'password'} // Alterna entre password e text
+            type={showPassword ? 'text' : 'password'}
             placeholder="Senha"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <span
             className="password-toggle"
-            onClick={() => setShowPassword(!showPassword)} // Alterna o estado de visualização da senha
+            onClick={() => setShowPassword(!showPassword)}
           >
-            {showPassword ? <FaEyeSlash /> : <FaEye />} {/* Ícone que alterna */}
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
           </span>
         </div>
         
