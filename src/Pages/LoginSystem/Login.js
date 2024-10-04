@@ -4,6 +4,8 @@ import { auth } from '../../Services/firebase';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './LoginRegister.css';
+import Header from '../../Components/Header';
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -35,6 +37,8 @@ const Login = () => {
   };
 
   return (
+    <>
+    <Header />
     <div className="login-container">
       <h2>Login</h2>
       {error && <div className="error-message">{error}</div>}
@@ -70,6 +74,7 @@ const Login = () => {
         <span>Não tem conta? <a href="/registro">Registre-se</a></span>
       </div>
     </div>
+    </>
   );
 };
 

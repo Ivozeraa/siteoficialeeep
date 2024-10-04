@@ -5,6 +5,8 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { setDoc, doc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 import './LoginRegister.css';
+import Header from '../../Components/Header';
+
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -60,6 +62,8 @@ const Register = () => {
   };
 
   return (
+  <>
+    <Header />
     <div className="login-container">
       <h2>Registrar</h2>
       {error && <div className="error-message">{error}</div>}
@@ -119,6 +123,7 @@ const Register = () => {
         Registrar com Google
       </button>
     </div>
+  </>
   );
 };
 
