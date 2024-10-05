@@ -3,10 +3,9 @@ import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } f
 import { auth, db } from '../../Services/firebase';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { setDoc, doc } from "firebase/firestore";
-import { useNavigate } from 'react-router-dom'; // Importar useNavigate
+import { useNavigate } from 'react-router-dom';
 import './LoginRegister.css';
 import Header from '../../Components/Header';
-
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -15,7 +14,7 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState('Aluno');
   const [error, setError] = useState('');
-  const navigate = useNavigate(); // Hook para redirecionar
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -33,6 +32,9 @@ const Register = () => {
         email: email,
         role: role,
       });
+
+      // Salvando no localStorage
+      localStorage.setItem('userName', name);
 
       alert(`Registrado como ${role}`);
       navigate('/login'); // Redireciona para a página de login após registro bem-sucedido
@@ -54,6 +56,9 @@ const Register = () => {
         role: 'Aluno',
       });
 
+      // Salvando no localStorage
+      localStorage.setItem('userName', user.displayName || "Usuário Google");
+
       alert('Registrado com Google!');
       navigate('/login'); // Redireciona para a página de login após registro bem-sucedido
     } catch (error) {
@@ -62,68 +67,68 @@ const Register = () => {
   };
 
   return (
-  <>
-    <Header />
-    <div className="login-container">
-      <h2>Registrar</h2>
-      {error && <div className="error-message">{error}</div>}
-      <form onSubmit={handleRegister}>
-        <input
-          type="text"
-          placeholder="Nome"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        
-        <div className="password-container">
+    <>
+      <Header />
+      <div className="login-container">
+        <h2>Registrar</h2>
+        {error && <div className="error-message">{error}</div>}
+        <form onSubmit={handleRegister}>
           <input
-            type={showPassword ? 'text' : 'password'}
-            placeholder="Senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            type="text"
+            placeholder="Nome"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
-          <span
-            className="password-toggle"
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? <FaEyeSlash /> : <FaEye />}
-          </span>
-        </div>
-
-        <div className="role-select">
-          <label>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          
+          <div className="password-container">
             <input
-              type="radio"
-              value="Aluno"
-              checked={role === 'Aluno'}
-              onChange={() => setRole('Aluno')}
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
-            Aluno
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="Convidado"
-              checked={role === 'Convidado'}
-              onChange={() => setRole('Convidado')}
-            />
-            Convidado
-          </label>
-        </div>
+            <span
+              className="password-toggle"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
 
-        <button type="submit">Registrar</button>
-      </form>
-      <button className="google-login" onClick={handleGoogleRegister}>
-        Registrar com Google
-      </button>
-    </div>
-  </>
+          <div className="role-select">
+            <label>
+              <input
+                type="radio"
+                value="Aluno"
+                checked={role === 'Aluno'}
+                onChange={() => setRole('Aluno')}
+              />
+              Aluno
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="Convidado"
+                checked={role === 'Convidado'}
+                onChange={() => setRole('Convidado')}
+              />
+              Convidado
+            </label>
+          </div>
+
+          <button type="submit">Registrar</button>
+        </form>
+        <button className="google-login" onClick={handleGoogleRegister}>
+          Registrar com Google
+        </button>
+      </div>
+    </>
   );
 };
 
