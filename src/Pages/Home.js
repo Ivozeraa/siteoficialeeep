@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../Components/Header';
+import CookieConsent from '../Components/Cookie'; // Importa o popup de cookies
 import "../Css/Home.css"
 
 const Home = () => {
@@ -11,6 +12,7 @@ const Home = () => {
         <p>Esta é a página inicial com as últimas atualizações e notícias da escola.</p>
         <button>Saiba mais</button>
       </div>
+      <CookieConsent />
     </>
   );
 };

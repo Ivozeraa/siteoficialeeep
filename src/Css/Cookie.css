@@ -1,0 +1,46 @@
+.cookie-consent {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 1000;
+    max-width: 90%;
+    width: 300px;
+}
+
+.cookie-consent p {
+    margin: 0;
+    font-size: 14px;
+    text-align: justify;
+}
+
+.cookie-consent button {
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.cookie-consent button:hover {
+    background-color: #45a049;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .cookie-consent {
+        bottom: 10px;
+        left: 10px;
+        padding: 15px;
+    }
+
+    .cookie-consent button {
+        padding: 8px 16px;
+    }
+}

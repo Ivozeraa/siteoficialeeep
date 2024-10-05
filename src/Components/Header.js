@@ -7,16 +7,26 @@ import '../Css/Header.css';
 const Header = () => {
   const [user, setUser] = useState(null); // Estado para o usuário logado
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false); // Estado para o menu mobile
   const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
   };
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen); // Alterna o estado do menu mobile
+  };
+
   const handleLogout = () => {
     auth.signOut();
     setUser(null); // Limpa o usuário ao deslogar
     navigate('/'); // Redireciona para a página inicial
+  };
+
+  const handleSobreClick = (event) => {
+    event.stopPropagation(); // Impede a propagação do clique
+    toggleDropdown(); // Alterna o dropdown "Sobre"
   };
 
   useEffect(() => {
@@ -38,18 +48,20 @@ const Header = () => {
         <h1 className="school-name">EEEP Irmã Ana Zélia</h1>
       </div>
 
-      <nav className="navbar">
+      <nav className={`navbar ${menuOpen ? 'show' : ''}`}>
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/cursos">Cursos</Link></li>
           <li><Link to="/noticias">Notícias</Link></li>
           <li className="dropdown">
-            <span>Sobre</span>
-            <div className="dropdown-content">
-              <Link to="/sobre/historia">História</Link>
-              <Link to="/sobre/gestao">Gestão</Link>
-              <Link to="/contato">Contato</Link>
-            </div>
+            <Link to="#" onClick={handleSobreClick}>Sobre</Link>
+            {dropdownVisible && (
+              <div className="dropdown-content">
+                <Link to="/sobre/historia">História</Link>
+                <Link to="/sobre/gestao">Gestão</Link>
+                <Link to="/contato">Contato</Link>
+              </div>
+            )}
           </li>
           {user ? (
             <li className="user-settings">
@@ -66,6 +78,13 @@ const Header = () => {
           )}
         </ul>
       </nav>
+
+      {/* Menu toggle (hambúrguer) */}
+      <div className={`menu-toggle ${menuOpen ? 'change' : ''}`} onClick={toggleMenu}>
+        <div className="bar1"></div>
+        <div className="bar2"></div>
+        <div className="bar3"></div>
+      </div>
     </header>
   );
 };

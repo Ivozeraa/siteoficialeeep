@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { auth, db } from '../../Services/firebase';
 import { doc, getDoc } from "firebase/firestore"; 
 import Header from '../../Components/Header';
+import CookieConsent from '../../Components/Cookie'; 
 import "../../Css/Header.css";
 
 const HomeLogado = () => {
@@ -32,6 +33,7 @@ const HomeLogado = () => {
         <p>Esta é a página inicial para usuários logados com as últimas atualizações e notícias da escola.</p>
         <button>Saiba mais</button>
       </div>
+      <CookieConsent />
     </>
   );
 };
