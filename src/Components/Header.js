@@ -6,12 +6,19 @@ import '../Css/Header.css';
 
 const Header = () => {
   const [user, setUser] = useState(null); // Estado para o usuário logado
-  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [sobreDropdownVisible, setSobreDropdownVisible] = useState(false); // Estado para o dropdown de "Sobre"
+  const [settingsDropdownVisible, setSettingsDropdownVisible] = useState(false); // Estado para o dropdown de configurações
   const [menuOpen, setMenuOpen] = useState(false); // Estado para o menu mobile
   const navigate = useNavigate();
 
-  const toggleDropdown = () => {
-    setDropdownVisible(!dropdownVisible);
+  const toggleSobreDropdown = () => {
+    setSobreDropdownVisible(!sobreDropdownVisible);
+    setSettingsDropdownVisible(false); // Fecha o outro dropdown se estiver aberto
+  };
+
+  const toggleSettingsDropdown = () => {
+    setSettingsDropdownVisible(!settingsDropdownVisible);
+    setSobreDropdownVisible(false); // Fecha o outro dropdown se estiver aberto
   };
 
   const toggleMenu = () => {
@@ -22,11 +29,6 @@ const Header = () => {
     auth.signOut();
     setUser(null); // Limpa o usuário ao deslogar
     navigate('/'); // Redireciona para a página inicial
-  };
-
-  const handleSobreClick = (event) => {
-    event.stopPropagation(); // Impede a propagação do clique
-    toggleDropdown(); // Alterna o dropdown "Sobre"
   };
 
   useEffect(() => {
@@ -50,12 +52,12 @@ const Header = () => {
 
       <nav className={`navbar ${menuOpen ? 'show' : ''}`}>
         <ul>
-          <li><Link to="/">Home</Link></li>
+          <li><Link to="/">Inicío</Link></li>
           <li><Link to="/cursos">Cursos</Link></li>
           <li><Link to="/noticias">Notícias</Link></li>
           <li className="dropdown">
-            <Link to="#" onClick={handleSobreClick}>Sobre</Link>
-            {dropdownVisible && (
+            <Link to="#" onClick={toggleSobreDropdown}>Sobre</Link>
+            {sobreDropdownVisible && (
               <div className="dropdown-content">
                 <Link to="/sobre/historia">História</Link>
                 <Link to="/sobre/gestao">Gestão</Link>
@@ -65,8 +67,8 @@ const Header = () => {
           </li>
           {user ? (
             <li className="user-settings">
-              <FaUserCircle size={40} className="user-icon" onClick={toggleDropdown} />
-              {dropdownVisible && (
+              <FaUserCircle size={40} className="user-icon" onClick={toggleSettingsDropdown} />
+              {settingsDropdownVisible && (
                 <ul className="settings-dropdown">
                   <li><Link to="/configuracoes">Configurações</Link></li>
                   <li><button onClick={handleLogout}>Deslogar</button></li>

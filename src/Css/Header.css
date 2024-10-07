@@ -43,13 +43,17 @@
   display: flex;
   gap: 20px;
   margin-right: 20px;
+  align-items: center;
+}
+
+.navbar ul li {
+  position: relative;
 }
 
 .navbar ul li a {
   color: white;
   text-decoration: none;
   font-size: 18px;
-  justify-content: center;
 }
 
 .navbar ul li a:hover {
@@ -68,75 +72,116 @@
 .menu-toggle div {
   width: 25px;
   height: 3px;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   transition: all 0.3s ease;
 }
 
-/* Mudanças de animação no botão */
-.change.bar1 {
+.change .bar1 {
   transform: rotate(-45deg) translate(-5px, 6px);
 }
 
-.change.bar2 {
+.change .bar2 {
   opacity: 0;
 }
 
-.change.bar3 {
+.change .bar3 {
   transform: rotate(45deg) translate(-5px, -6px);
 }
 
-/* Menu dropdown */
+/* Dropdown menus */
 .dropdown-content {
-  display: none; /* Escondido por padrão */
+  display: none;
   position: absolute;
-  top: 100%;
-  left: 50%; /* Alinhamento central */
-  transform: translateX(-50%); /* Ajusta para centralizar */
-  background-color: #2c6e49;
+  top: calc(100% + 5px); /* Fica um pouco abaixo do link */
+  left: 0;
+  background-color: #1d4d31;
   padding: 10px;
-  border-radius: 0px;
-  z-index: 1001; /* Para aparecer acima do menu */
+  border-radius: 5px;
+  z-index: 1001;
+  flex-direction: column;
+  align-items: start; /* Alinha os itens na vertical */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: max-content; /* Ajuste para que o dropdown não seja muito pequeno */
 }
 
 .dropdown:hover .dropdown-content,
 .dropdown-content.show {
-  display: block; /* Mostrar o dropdown */
+  display: flex;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 5px 0;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  color: #a4d3a2;
 }
 
 /* Estilo do ícone do usuário */
 .user-settings {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .user-icon {
   cursor: pointer;
-  color: white;
+  color: rgb(255, 255, 255);
+  position: relative;
 }
 
 .settings-dropdown {
   display: none;
   position: absolute;
-  top: 50px;
+  top: calc(100% + 10px); /* Um pouco abaixo da navbar */
   right: 0;
   background-color: #2c6e49;
-  padding: 10px;
+  padding: 1px;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+  width: 200px; /* Ajuste para manter o dropdown dentro da tela */
 }
 
 .settings-dropdown li {
-  padding: 10px 0;
+  padding: 8px 0;
 }
 
-.settings-dropdown li a, 
+.settings-dropdown li a,
 .settings-dropdown li button {
   color: white;
   background: none;
   border: none;
   cursor: pointer;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 18px;
   display: block;
+}
+
+.user-settings:hover .settings-dropdown,
+.settings-dropdown.show {
+  display: flex;
+}
+
+/* Ajuste do dropdown "Sobre" e "Configurações" para telas menores */
+.dropdown-content {
+  width: max-content; /* Ajuste para manter a largura adequada */
+}
+
+.user-settings .settings-dropdown,
+.dropdown-content {
+  width: 200px; /* Mantendo o tamanho adequado */
+}
+
+.dropdown-content a,
+.settings-dropdown a,
+.settings-dropdown button {
+  color: white;
+  text-align: left;
+  padding: 8px 0;
 }
 
 /* Responsividade */
@@ -151,6 +196,7 @@
     top: 60px;
     left: 0;
     border-radius: 0 0 10px 10px;
+    align-items: center;
   }
 
   .navbar.show ul {
@@ -162,9 +208,15 @@
   }
 
   .dropdown-content {
-    position: relative; /* Para que o dropdown fique no fluxo do layout */
-    top: auto; /* Não posicione absoluto em mobile */
-    left: auto; /* Não posicione absoluto em mobile */
+    width: 100%; /* Expande o dropdown para toda a largura da tela */
+    position: relative; /* O dropdown vai se ajustar dentro do fluxo do layout */
+    top: auto;
+    left: auto;
+  }
+
+  .navbar ul li a {
+    text-align: center;
+    width: 100%;
   }
 }
 
