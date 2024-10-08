@@ -1,0 +1,188 @@
+/* src/Css/AdminDashboard.css */
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  .dashboard-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #2e7d32;
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 30px;
+  }
+  
+  .dashboard-title {
+    font-size: 2rem;
+  }
+  
+  .logout-btn {
+    background-color: white;
+    color: #2e7d32;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 1rem;
+    border: 2px solid white;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .logout-btn:hover {
+    background-color: #1b5e20;
+    color: white;
+  }
+  
+  .dashboard-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .card {
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    width: calc(33.33% - 20px);
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card h3 {
+    font-size: 1.5rem;
+    color: #2e7d32;
+    margin-bottom: 15px;
+  }
+  
+  .card p {
+    font-size: 1rem;
+    color: #424242;
+    margin-bottom: 20px;
+  }
+  
+  .card button {
+    background-color: #2e7d32;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .card button:hover {
+    background-color: #1b5e20;
+  }
+  
+  .post-list {
+    width: 100%;
+    margin-top: 30px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .post-list table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .post-list th,
+  .post-list td {
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    text-align: left;
+  }
+  
+  .post-list th {
+    background-color: #2e7d32;
+    color: white;
+  }
+  
+  .post-list td {
+    color: #424242;
+  }
+  
+  .post-list button {
+    background-color: #2e7d32;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .post-list button:hover {
+    background-color: #1b5e20;
+  }
+  
+  /* Estilos para a seção de gerenciamento de usuários */
+  .option-content {
+    width: 100%;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .option-content h2 {
+    color: #2e7d32;
+  }
+  
+  .option-content input[type="text"],
+  .option-content input[type="file"],
+  .option-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+  }
+  
+  .option-content button {
+    background-color: #2e7d32;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .option-content button:hover {
+    background-color: #1b5e20;
+  }
+  
+  /* Estilo para a lista de usuários */
+  .option-content ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .option-content li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .option-content li:last-child {
+    border-bottom: none;
+  }
+  

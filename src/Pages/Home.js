@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../Components/Header';
 import CookieConsent from '../Components/Cookie';
 import "../Css/Home.css"
+import Blog from '../Components/Blog'
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
         <button>Saiba mais</button>
       </div>
       <CookieConsent />
+      <Blog />
     </>
   );
 };

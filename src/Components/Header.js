@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUserCircle } from 'react-icons/fa';
-import { auth } from '../Services/firebase'; // Importa a autenticação do Firebase
+import { auth, db } from '../Services/firebase'; // Importa a autenticação e o banco de dados do Firebase
+import { doc, getDoc } from "firebase/firestore"; 
 import '../Css/Header.css';
 
 const Header = () => {
   const [user, setUser] = useState(null); // Estado para o usuário logado
+  const [isAdmin, setIsAdmin] = useState(false); // Estado para verificar se o usuário é admin
   const [sobreDropdownVisible, setSobreDropdownVisible] = useState(false); // Estado para o dropdown de "Sobre"
   const [settingsDropdownVisible, setSettingsDropdownVisible] = useState(false); // Estado para o dropdown de configurações
   const [menuOpen, setMenuOpen] = useState(false); // Estado para o menu mobile
@@ -31,10 +33,17 @@ const Header = () => {
     navigate('/'); // Redireciona para a página inicial
   };
 
+  // Verifica o estado de autenticação e se o usuário é admin
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
-        setUser(user); // Define o usuário se estiver logado
+        setUser(user); // Define o usuário logado
+        
+        // Verifica se o usuário é admin no Firestore
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists()) {
+          setIsAdmin(userDoc.data().role === 'admin'); // Verifica a role do usuário
+        }
       } else {
         setUser(null);
       }
@@ -54,7 +63,7 @@ const Header = () => {
         <ul>
           <li><Link to="/">Inicío</Link></li>
           <li><Link to="/cursos">Cursos</Link></li>
-          <li><Link to="/noticias">Notícias</Link></li>
+          <li><Link to="/blog">Notícias</Link></li>
           <li className="dropdown">
             <Link to="#" onClick={toggleSobreDropdown}>Sobre</Link>
             {sobreDropdownVisible && (
@@ -71,6 +80,7 @@ const Header = () => {
               {settingsDropdownVisible && (
                 <ul className="settings-dropdown">
                   <li><Link to="/configuracoes">Configurações</Link></li>
+                  {isAdmin && <li><Link to="/admin-dashboard">Admin Dashboard</Link></li>} {/* Link visível apenas para admins */}
                   <li><button onClick={handleLogout}>Deslogar</button></li>
                 </ul>
               )}
